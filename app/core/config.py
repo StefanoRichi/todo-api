@@ -1,11 +1,13 @@
-import os
-from dotenv import load_dotenv
+import os , errno
 from pydantic_settings import BaseSettings
 
-path = "%s/.env" % os.getcwd()
-load_dotenv(dotenv_path=path)
+try:
+    os.makedirs("db-data")
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        raise
 
-sqlite_file_name = "todo.db"
+sqlite_file_name = "db-data/todo.db"
 
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
