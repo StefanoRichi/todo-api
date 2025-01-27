@@ -9,6 +9,9 @@ engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base: DeclarativeMeta = declarative_base()
 
+def create_db_and_tables():
+    Base.metadata.create_all(bind=engine)
+
 def get_db():
     db = SessionLocal()
     try:

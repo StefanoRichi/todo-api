@@ -10,4 +10,3 @@ class Todo(Base):
     is_done =  Column(Boolean , default=False , comment="สถานะของรายการ")
     is_done_timestamp =  Column(DateTime , nullable=True, comment="วันเวลาของสถานะของรายการ")
     due_date =  Column(Date , comment="วันครบกำหนดรายการ")
-

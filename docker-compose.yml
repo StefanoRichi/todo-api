@@ -3,28 +3,8 @@ services:
     container_name: todo_api
     build: .
     restart: always
+    image: natthaphonarceci/todoapi:lastest
     ports:
       - "8001:8000"
     environment:
-      - POSTGRES_HOST=${DB_CONTAINER_NAME}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - TZ=Asia/Bangkok
-    depends_on:
-      - todo_con_db
-
-  todo_con_db:
-    image: postgres:14-alpine
-    container_name: ${DB_CONTAINER_NAME}
-    restart: always
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-      #- ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - TZ=Asia/Bangkok
-    ports:
-      - "5432:5432"
