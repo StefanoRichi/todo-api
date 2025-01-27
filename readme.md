@@ -1,23 +1,19 @@
-# Setup Project
-- สร้างไฟล์ .env
-```
-POSTGRES_HOST=localhost
-DB_CONTAINER_NAME=todo_con_db
-POSTGRES_DB=todo_db
-POSTGRES_USER=todouser
-POSTGRES_PASSWORD=1234
-```
+# Todo API
+This project is a Todo App developed using the FastAPI framework. Its purpose is to serve as a simple API backend, which can be integrated with a mobile app or any other frontend application hosted by the user. The API includes an embedded SQLite database for data storage.
 
-# init 
-- ทำการ init alembic เพื่อสร้างไฟล์ config ในการสร้าง Table
+This API provides basic CRUD operations and includes auto-generated documentation accessible through Swagger or Redoc.
+
+To start use command below:
 ```
- alembic init alembic
+docker run -d --name todo-con -p 8000:8000 natthaphonarceci/todoapi:latest
 ```
-- Generate Script ที่จะใช้ในการสร้าง Table หรือ Migrate
+Then, access it via http://localhost:8000 or http://localhost:8000/docs for swagger WEB UI and http://localhost:8000/redoc for redoc WEB UI in a browser.
+
+You can mount db data (SQLite) by using command below:
 ```
- alembic revision --autogenerate
+docker run --rm -d --name todo-con -p 8000:8000 -v /path/to/store:/code/db-data natthaphonarceci/todoapi:latest
 ```
-- ทำการ Migrate Table หรือสร้่างขึ้นมาด้วยคำสั่ง
+EX.
 ```
- alembic upgrade head
+docker run --rm -d --name todo-con -p 8000:8000 -v ./db-data:/code/db-data natthaphonarceci/todoapi:latest
 ```
