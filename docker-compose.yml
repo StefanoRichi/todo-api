@@ -3,7 +3,9 @@ services:
     container_name: todo_api
     build: .
     restart: always
-    image: natthaphonarceci/todoapi:lastest
+    images: natthaphonarceci/todoapi:latest
+    # image: natthaphonarceci/todoapi-arm64:latest
+    # images: natthaphonarceci/todoapi-amd64:latest
     ports:
       - "8001:8000"
     environment:

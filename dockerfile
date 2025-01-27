@@ -1,6 +1,9 @@
 # Use the official Python base image
 FROM python:3.13-slim
 
+# Print Arch
+RUN python -c 'import os;print(f"Arch: {os.uname().machine}")' > /tmp/arch.txt
+
 # Set the working directory inside the container
 WORKDIR /code
 
