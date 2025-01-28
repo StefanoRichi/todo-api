@@ -58,7 +58,7 @@ def update_todos(
     else:
         raise HTTPException(status_code=404, detail="Data not found!")
     
-    return {"message": result}
+    return result
 
 @router.delete("/{id:int}")
 def delete_todos(
@@ -70,5 +70,5 @@ def delete_todos(
         result = todo_crud.delete_by_id(db,todo_obj)
     else:
         raise HTTPException(status_code=404, detail="Data not found!")
-    return {"message": result}
+    return result
 
