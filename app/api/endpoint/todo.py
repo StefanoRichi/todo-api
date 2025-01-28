@@ -42,15 +42,8 @@ def create_todos(
     data: TodoCreate,
     db: Session = Depends(get_db),
     ):
-    todo = Todo(
-      title=data.title,
-      detail=data.detail,
-      due_date=data.duedate
-    )
-    db.add(todo)
-    db.commit()
-    db.refresh(todo)
-    return {"status": "success"}
+    todo_obj = todo_crud.insert_todo(db,data)
+    return todo_obj
 
 @router.put("/{id:int}")
 def update_todos(

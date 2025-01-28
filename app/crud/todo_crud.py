@@ -1,6 +1,6 @@
 from app.models import Todo
 from sqlalchemy.orm import Session
-from app.schemas import TodoUpdate
+from app.schemas import TodoUpdate , TodoCreate
 
 class CrudTodo:
     def get_all(self, db: Session  ):
@@ -26,16 +26,29 @@ class CrudTodo:
         ) 
     
     def update_by_id(self, db: Session , todo: Todo , data: TodoUpdate  ):
-        todo.due_date=data.duedate
-        todo.title=data.title
-        todo.detail=data.detail
+        todo.due_date=data.due_date # type: ignore
+        todo.title=data.title # type: ignore
+        todo.detail=data.detail # type: ignore
+        todo.is_done=data.is_done # type: ignore
         db.commit()
         db.refresh(todo)
-        return "update Todo success"
+        return {"status": "Update Success"}
+
+    def insert_todo(self, db: Session , data: TodoCreate ):
+        todo = Todo(
+        title=data.title,
+        detail=data.detail,
+        due_date=data.due_date
+        )
+        db.add(todo)
+        db.commit()
+        db.refresh(todo)
+        return {"status": "Create Success"}
+    
 
     def delete_by_id(self, db: Session , todo: Todo  ):
         db.delete(todo)
         db.commit()
-        return "Delete Todo Success"
+        return {"status": "Delete Success"}
 
 todo_crud = CrudTodo()

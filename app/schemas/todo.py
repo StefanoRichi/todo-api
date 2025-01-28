@@ -5,7 +5,7 @@ from datetime import date
 class TodoCreate(BaseModel):
     title: str
     detail: str | None
-    duedate: date
+    due_date: date
 
     model_config = {
         "json_schema_extra": {
@@ -13,7 +13,7 @@ class TodoCreate(BaseModel):
                 {
                     "title": "ชื่อรายการ",
                     "detail": "รายละเอียดข้อมูล",
-                    "duedate":"วันครบกำหนดรายการ(yyyy-mm-dd)"
+                    "due_date":"วันครบกำหนดรายการ(yyyy-mm-dd)"
                 }
             ]
         }
@@ -22,7 +22,8 @@ class TodoCreate(BaseModel):
 class TodoUpdate(BaseModel):
     title: str
     detail: str | None
-    duedate: date
+    due_date: date
+    is_done: bool
 
     model_config = {
         "json_schema_extra": {
@@ -30,7 +31,8 @@ class TodoUpdate(BaseModel):
                 {
                     "title": "ชื่อรายการ",
                     "detail": "รายละเอียดข้อมูล",
-                    "duedate":"วันครบกำหนดรายการ(yyyy-mm-dd)"
+                    "due_date":"วันครบกำหนดรายการ(yyyy-mm-dd)",
+                    "is_done": "สถานะของรายการ (true/false)"
                 }
             ]
         }
