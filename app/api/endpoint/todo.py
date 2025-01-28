@@ -37,7 +37,7 @@ def get_todos_by_title(
         raise HTTPException(status_code=404, detail="Data not found!")
     return todo_obj
 
-@router.post("/create")
+@router.post("")
 def create_todos(
     data: TodoCreate,
     db: Session = Depends(get_db),
